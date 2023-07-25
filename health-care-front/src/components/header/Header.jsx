@@ -19,12 +19,14 @@ const Header = () => {
 };
 
 const styles = {
+  
   header: {
     backgroundColor:  '#9dadbd', 
     color: '#fff',
     padding: '1rem',
     textAlign : 'left',
     fontSize: '12px'
+    
     
   },
   nav: {
@@ -34,6 +36,7 @@ const styles = {
     alignItems: 'left',
     
   },
+  
 };
 
 export default Header;
