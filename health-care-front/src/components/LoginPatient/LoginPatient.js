@@ -19,7 +19,7 @@ function LoginPatient({ handleShow, handleClose, show }) {
             id="username"
             placeholder="UserName"
             // value={username}
-            // onChange={(e) => setUsername(e.target.value)}
+            // onChange={(e) => setUsername(e.target?.value)}
           />
           <Form.Label htmlFor="inputPassword4">Password</Form.Label>
           <Form.Control
@@ -27,7 +27,7 @@ function LoginPatient({ handleShow, handleClose, show }) {
             id="inputPassword4"
             aria-describedby="passwordHelpBlock"
             // value={password}
-            // onChange={(e) => setPassword(e.target.value)}
+            // onChange={(e) => setPassword(e.target?.value)}
           />
         </Modal.Body>
         <Modal.Footer>
