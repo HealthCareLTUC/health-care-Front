@@ -4,8 +4,21 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 function LoginPatient({ handleShow, handleClose, show }) {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  async function getPatientData(url,username,password){
+
+
+    const response = (await fetch(`${url}/getPatient/${username}`));
+    const data=await response.json()
+    console.log(response)
+    console.log(data)
+    if((data[0]["name"]==username)&&(data[0]["password"]==password)){
+      console.log(`logged in successfully`);
+    }else{
+      console.log("failed to login");
+    }
+}
   return (
     <>
       <Modal show={show} onHide={handleClose}>
@@ -18,23 +31,21 @@ function LoginPatient({ handleShow, handleClose, show }) {
             type="text"
             id="username"
             placeholder="UserName"
-            // value={username}
-            // onChange={(e) => setUsername(e.target?.value)}
+            onChange={(e) => setUsername(e.target?.value)}
           />
           <Form.Label htmlFor="inputPassword4">Password</Form.Label>
           <Form.Control
             type="password"
             id="inputPassword4"
             aria-describedby="passwordHelpBlock"
-            // value={password}
-            // onChange={(e) => setPassword(e.target?.value)}
+            onChange={(e) => setPassword(e.target?.value)}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={async()=>{await getPatientData("https://healthcare-back.onrender.com", username, password)}}>
             Login
           </Button>
         </Modal.Footer>
