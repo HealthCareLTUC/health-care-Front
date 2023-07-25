@@ -7,14 +7,14 @@ function SignupPatient({ handleShow, handleClose, show }) {
   const [similar, setSimilar] = useState(false);
 
   useEffect(() => {
-    const password1 = document.querySelector("#inputPassword7").value;
-    const password2 = document.querySelector("#inputPassword8").value;
+    const password1 = document.querySelector("#inputPassword7")?.value;
+    const password2 = document.querySelector("#inputPassword8")?.value;
     setSimilar(password1 === password2);
   }, []);
 
   const handlePasswordChange = () => {
-    const password1 = document.querySelector("#inputPassword7").value;
-    const password2 = document.querySelector("#inputPassword8").value;
+    const password1 = document.querySelector("#inputPassword7")?.value;
+    const password2 = document.querySelector("#inputPassword8")?.value;
     setSimilar(password1 === password2);
   };
 

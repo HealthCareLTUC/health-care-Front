@@ -24,10 +24,10 @@ function Index() {
         <div>
 
             <RootNavBar />
-            <LoginDoctor  handleClose={handleClose} handleShow={handleShow} show={show} />
-            <LoginPatient handleClose={handleClose1} handleShow={handleShow1} show={show1}/>
-            <SignupDoctor handleClose={handleClose2} handleShow={handleShow2} show={show2}/>
-            <SignupPatient handleClose={handleClose3} handleShow={handleShow3} show={show3}/>
+            <LoginDoctor handleClose={handleClose} handleShow={handleShow} show={show} />
+            <LoginPatient handleClose={handleClose1} handleShow={handleShow1} show={show1} />
+            <SignupDoctor handleClose={handleClose2} handleShow={handleShow2} show={show2} />
+            <SignupPatient handleClose={handleClose3} handleShow={handleShow3} show={show3} />
             <Stack direction="horizontal" gap={2} className="col-md-5 mx-auto my-2">
                 <div className='mx-2'>
                     <fieldset className='border border-dark'>
@@ -36,24 +36,24 @@ function Index() {
                         </p>
                     </fieldset>
                 </div>
-                <img className='img1' src='https://sa1s3optim.patientpop.com/assets/images/provider/photos/2414214.jpg'alt='healthcare' />
+                <img className='img1' src='https://sa1s3optim.patientpop.com/assets/images/provider/photos/2414214.jpg' alt='healthcare' />
             </Stack >
-                <Stack direction="horizontal" gap={2} className="col-md-5 mx-auto my-2">
-                    <Button as="a" className='mx-5 my-5' variant="primary" onClick={()=>setShow(!show)}>
-                        Doctor's Login
-                    </Button>
-                    <Button as="a" className='mx-5 my-5'  variant="success" onClick={()=>setShow1(!show1)}>
-                        Patient's Login
-                    </Button>
-                </Stack>
-                <Stack direction="horizontal" gap={2} className="col-md-5 mx-auto my-2">
-                    <Button as="a" className='mx-5 my-5'  variant="primary" onClick={()=>setShow2(!show2)}>
-                        Doctor's Signup
-                    </Button>
-                    <Button as="a" className='mx-5 my-5'  variant="success" onClick={()=>setShow3(!show3)}>
-                        Patient's Signup
-                    </Button>
-                </Stack>
+            <Stack direction="horizontal" gap={2} className="col-md-5 mx-auto my-2">
+                <Button as="a" className='mx-5 my-5' variant="primary" onClick={() => setShow(!show)}>
+                    Doctor's Login
+                </Button>
+                <Button as="a" className='mx-5 my-5' variant="success" onClick={() => setShow1(!show1)}>
+                    Patient's Login
+                </Button>
+            </Stack>
+            <Stack direction="horizontal" gap={2} className="col-md-5 mx-auto my-2">
+                <Button as="a" className='mx-5 my-5' variant="primary" onClick={() => setShow2(!show2)}>
+                    Doctor's Signup
+                </Button>
+                <Button as="a" className='mx-5 my-5' variant="success" onClick={() => setShow3(!show3)}>
+                    Patient's Signup
+                </Button>
+            </Stack>
         </div>
 
     )

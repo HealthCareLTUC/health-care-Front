@@ -1,14 +1,19 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 function SignupDoctor({ handleShow, handleClose, show }) {
   const [similar, setSimilar] = useState(false);
+  useEffect(() => {
+    const password1 = document.querySelector("#inputPassword5")?.value;
+    const password2 = document.querySelector("#inputPassword6")?.value;
+    setSimilar(password1 === password2);
+  }, []);
 
   const handlePasswordChange = () => {
-    const password1 = document.querySelector("#inputPassword5").value;
-    const password2 = document.querySelector("#inputPassword6").value;
+    const password1 = document.querySelector("#inputPassword5")?.value;
+    const password2 = document.querySelector("#inputPassword6")?.value;
     setSimilar(password1 === password2);
   };
 
