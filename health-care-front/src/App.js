@@ -21,7 +21,6 @@ function App() {
      <Route path='/profile' element={<></>}/>
     
     </Routes>
- <Index />
     </div>
   );
 }
