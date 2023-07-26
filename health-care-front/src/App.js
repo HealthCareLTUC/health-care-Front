@@ -1,7 +1,9 @@
 
 
 
+
 import './App.css';
+
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 //import Reserve from './components/Reserve/Reserve';
@@ -16,6 +18,10 @@ function App() {
    
     <div className="App"> 
     <NavBar />
+
+   <Index />
+
+
        <Home /> 
    
     <Routes> 
@@ -24,7 +30,11 @@ function App() {
      <Route path='/profile' element={<></>}/>
     
     </Routes>
+                                     
+                                     
+                                     
     </div>
+
 
   );
 }

@@ -1,10 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function SignupPatient({ handleShow, handleClose, show }) {
   const [similar, setSimilar] = useState(false);
+  const [username, setUsername] = useState(``)
+  const [password, setPassword] = useState(``)
+  const [history, setHistory] = useState(``)
+  const [age, setAge] = useState(30)
+  const alreadyUsed=useRef(true)
+
 
   useEffect(() => {
     const password1 = document.querySelector("#inputPassword7")?.value;
@@ -15,8 +21,40 @@ function SignupPatient({ handleShow, handleClose, show }) {
   const handlePasswordChange = () => {
     const password1 = document.querySelector("#inputPassword7")?.value;
     const password2 = document.querySelector("#inputPassword8")?.value;
+    setPassword(document.querySelector("#inputPassword7")?.value)
     setSimilar(password1 === password2);
   };
+  async function usernameChecker(url, username) {
+    
+    const response = await fetch(`${url}/patientName/${username}`);
+    const data = await response.json();
+     alreadyUsed.current = data.some((item) => item.name === username);
+
+}
+
+  async function postPatientData(url, username, password, history, age, similar,alreadyUsed) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        n: username,
+        pa: password,
+        h: history,
+        ap: " ",
+        a: age
+      })
+    };
+    if (similar) {
+      const response = await fetch(`${url}/insertPatenit`, requestOptions);
+      const data = await response.json();
+      console.log(data);
+      console.log(password);
+      console.log(username);
+
+    }
+
+  }
+
 
   return (
     <>
@@ -26,7 +64,17 @@ function SignupPatient({ handleShow, handleClose, show }) {
         </Modal.Header>
         <Modal.Body>
           <Form.Label htmlFor="username">Username</Form.Label>
-          <Form.Control id="username" type="text" placeholder="UserName" />
+          <Form.Control id="username" type="text" placeholder="UserName" onChange={() => { setUsername(document.querySelector("#username")?.value);}} />
+          <Button variant="secondary" onClick={async()=>{ await usernameChecker("https://healthcare-back.onrender.com",username,alreadyUsed);}}>
+            Check if username unique
+          </Button>
+          <Form.Text id="usernameHelp" muted>
+            {alreadyUsed.current ? "The Username is already used" : "The Username is accepted"}
+          </Form.Text>
+          <Form.Label htmlFor="history">Disease you had or are still having</Form.Label>
+          <Form.Control id="history" type="text" placeholder="Disease History" onChange={() => { setHistory(document.querySelector("#history")?.value) }} />
+          <Form.Label htmlFor="age">Age</Form.Label>
+          <Form.Control id="age" type="number" placeholder="age" onChange={() => { setAge(document.querySelector("#age")?.value) }} />
           <Form.Label htmlFor="inputPassword7">Password</Form.Label>
           <Form.Control
             type="password"
@@ -52,8 +100,8 @@ function SignupPatient({ handleShow, handleClose, show }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Login
+          <Button variant="primary" onClick={async () => await postPatientData("https://healthcare-back.onrender.com", username, password, history, age, similar,alreadyUsed)}>
+            Signup
           </Button>
         </Modal.Footer>
       </Modal>
