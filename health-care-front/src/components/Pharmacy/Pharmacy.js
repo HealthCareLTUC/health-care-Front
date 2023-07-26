@@ -1,63 +1,65 @@
-import { Button, Col, Container, Form, Row,Card } from "react-bootstrap";
 import { useState } from "react";
- function Pharmacy() {
-    const [drug, setSearchTerm] = useState('');
-    const [drugList, setDrugList] = useState([]);
-    const handelinput =(event)=>{
-        setSearchTerm(event.target.value);
-    }
-    const handelsearch = async () => {  
-        const response = await fetch(`http://localhost:3004/pricename/${drug}`); 
-        if (response.ok) {
-          const data = await response.json(); 
-          setDrugList(data);
-          console.log(data);
-          console.log("okay");
-        }
+import { Card } from "react-bootstrap";
+import "./Pharmacy.css"
+function Pharmacy() {
+  const [drug, setDrug] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = async () => {
+    setIsLoading(true);
+    try {
+      const url = `https://healthcare-back.onrender.com/search/${searchTerm}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data) {
+        setDrug({
+          drug_name: searchTerm,
+          generic_name: data.generic_name,
+          brand_name: data.brand_name,
+          dosage_form: data.dosage_form,
+          pharm_class: data.pharm_class,
+        });
+      } else {
+        setDrug(null);
       }
-    
+    } catch (error) {
+      console.error(error);
+      setDrug(null);
+    }
+    setIsLoading(false);
+  };
+
   return (
-    <Container className="mt-5">
-      <Row className="d-flex justify-content-center align-items-center">
-        <Col sm={4}>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              onChange={handelinput}
-            />
-            <Button onClick={handelsearch}>
-              Search
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-      <Row className="mt-4">
-        {drugList.map((drug) => (
-          <Col key={drug.id} md={4}>
-            <Card>
-              <Card.Body>
-                <Card.Title>{drug.generic_name }</Card.Title>
-                <Card.Text>{drug.brand_name }</Card.Text>
-                <Card.Text>{drug.generic_name }</Card.Text>
-                <Card.Text>{drug.description}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <div className="c">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Enter drug name"
+        style={{marginTop:"200px",color:"white"}}
+      />
+      <button className="search-button" onClick={handleSearch}>search
+      
+</button>
+
+      {isLoading && <div style={{color:"white"}}>Loading...</div>}
+
+      {drug && (
+        <div>
+          <Card style={{ width: "18rem", marginLeft:"500px" }}>
+            <Card.Body>
+              <Card.Title>Drug: {drug.drug_name}</Card.Title>
+              <Card.Text>Generic Name: {drug.generic_name}</Card.Text>
+              <Card.Text>Brand Name: {drug.brand_name}</Card.Text>
+              <Card.Text>Dosage Form: {drug.dosage_form}</Card.Text>
+              <Card.Text>Pharm Class: {drug.pharm_class}</Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      )}
+    </div>
   );
 }
+
 export default Pharmacy;
-
-
-
-
-
-
-
-
-
