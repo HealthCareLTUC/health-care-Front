@@ -6,12 +6,16 @@ function LoginDoctor({ handleShow, handleClose, show }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   async function getDoctorData(url,username,password){
+    try {
     const response = (await fetch(`${url}/DoctorName/${username}`));
     const data=await response.json()
     if((data[0]["name"]==username)&&(data[0]["password"]==password)){
       console.log(`logged in successfully`);
     }else{
       console.log("failed to login");
+    }} catch (error) {
+      alert("Username is wrong "+error)
+
     }
 }
 
