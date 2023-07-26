@@ -1,0 +1,53 @@
+.Pharmacy-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  input {
+    padding: 8px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  button {
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    
+  }
+  
+  .Pharmacy-loader {
+    margin-top: 20px;
+  }
+  
+  .Pharmacy-card {
+    margin-top: 20px;
+  }
+  .c{
+    text-align: center;
+    margin-top: "200px";
+  }
+  input{
+    text-align: center;
+    margin-top: "200px";
+    background: rgba(236, 237, 237, 0.113);
+   border: none;
+   height: 60px;
+   width: 550px;
+   
+  }
+  body{
+
+  background-image: linear-gradient(rgba(0,8,51,0.9),rgba(0,8,51,0.9)),url("drug.jpg");
+  background-size:cover;
+}
