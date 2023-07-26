@@ -1,6 +1,9 @@
 
 
-// import './App.css';
+
+
+import './App.css';
+
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 //import Reserve from './components/Reserve/Reserve';
@@ -11,10 +14,28 @@ import Pharmacy from './components/Pharmacy/Pharmacy';
 import Index from './components/index/Index'
 function App() {
   return (
+
+   
     <div className="App"> 
     <NavBar />
+
    <Index />
-   </div>
+
+
+       <Home /> 
+   
+    <Routes> 
+      <Route path='/about' element={<About/>}/>
+      <Route path='/pharmacy' element={<Pharmacy/>}/>
+     <Route path='/profile' element={<></>}/>
+    
+    </Routes>
+                                     
+                                     
+                                     
+    </div>
+
+
   );
 }
 
