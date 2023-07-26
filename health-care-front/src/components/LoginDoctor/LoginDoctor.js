@@ -2,11 +2,23 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+function LoginDoctor({ handleShow, handleClose, show ,callback}) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  async function getDoctorData(url,username,password){
+    try {
+    const response = (await fetch(`${url}/DoctorName/${username}`));
+    const data=await response.json()
+    if((data[0]["name"]==username)&&(data[0]["password"]==password)){
+      console.log(`logged in successfully`);
+      return data
+    }else{
+      console.log("failed to login");
+    }} catch (error) {
+      alert("Username is wrong "+error)
 
-function LoginDoctor({ handleShow, handleClose, show }) {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
-
+    }
+}
 
   return (
     <>
@@ -20,23 +32,21 @@ function LoginDoctor({ handleShow, handleClose, show }) {
             type="text"
             id="username"
             placeholder="UserName"
-            // value={username}
-            // onChange={(e) => setUsername(e.target?.value)}
+            onChange={(e) => setUsername(e.target?.value)}
           />
           <Form.Label htmlFor="inputPassword3">Password</Form.Label>
           <Form.Control
             type="password"
             id="inputPassword3"
             aria-describedby="passwordHelpBlock"
-            // value={password}
-            // onChange={(e) => setPassword(e.target?.value)}
+            onChange={(e) => setPassword(e.target?.value)}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={async()=>{await callback(await getDoctorData("https://healthcare-back.onrender.com", username, password))}}>
             Login
           </Button>
         </Modal.Footer>

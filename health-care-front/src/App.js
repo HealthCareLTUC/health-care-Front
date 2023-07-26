@@ -1,5 +1,7 @@
 
+
 import './App.css';
+
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 //import Reserve from './components/Reserve/Reserve';
@@ -10,9 +12,15 @@ import Pharmacy from './components/Pharmacy/Pharmacy';
 import Index from './components/index/Index'
 function App() {
   return (
+
+   
     <div className="App"> 
-    <NavBar />
-       <Home /> 
+    
+
+   <Index />
+
+
+      
    
     <Routes> 
       <Route path='/about' element={<About/>}/>
@@ -22,6 +30,8 @@ function App() {
     </Routes>
 
     </div>
+
+
   );
 }
 
