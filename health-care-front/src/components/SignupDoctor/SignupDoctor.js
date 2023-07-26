@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 function SignupDoctor({ handleShow, handleClose, show }) {
   const [similar, setSimilar] = useState(false);
@@ -9,7 +10,6 @@ function SignupDoctor({ handleShow, handleClose, show }) {
   const [address, setAddress] = useState(``)
   const [specialty, setSpecialty] = useState(``)
   const [phone,setPhone] =useState(123)
-  const alreadyUsed=useRef(true)
   const url = process.env.REACT_APP_SERVER_URL;
   
   useEffect(() => {
@@ -24,18 +24,11 @@ function SignupDoctor({ handleShow, handleClose, show }) {
     setPassword(document.querySelector("#inputPassword5")?.value)
     setSimilar(password1 === password2);
   };
-  async function usernameChecker(url, username) {
-    
-      const response = await fetch(`${url}/DoctorName/${username}`);
-      const data = await response.json();
-       alreadyUsed.current = data.some((item) => item.name === username);
-       console.log(response);
-       console.log(data);
-       console.log(alreadyUsed.current);
+  
 
 
-  }
-   async function postDoctorData(url, username, password, address, specialty,phone, similar,alreadyUsed) {
+
+   async function postDoctorData(url, username, password, address, specialty,phone, similar) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -47,15 +40,15 @@ function SignupDoctor({ handleShow, handleClose, show }) {
         p:phone
       })
     };
-    if (similar && !alreadyUsed) {
+    if (similar) {
       const response = await fetch(`${url}/insertDoctor`, requestOptions);
       const data =await  response.json();
-      console.log(data);
-      console.log(password);
-      console.log(username);
-      console.log(address);
-      console.log(specialty);
-      console.log(phone);
+      // console.log(data);
+      // console.log(password);
+      // console.log(username);
+      // console.log(address);
+      // console.log(specialty);
+      // console.log(phone);
 
     }
 
@@ -71,18 +64,12 @@ function SignupDoctor({ handleShow, handleClose, show }) {
         <Modal.Body>
           <Form.Label htmlFor="username">Username</Form.Label>
           <Form.Control id="username" type="text" placeholder="UserName" onChange={async () => { setUsername(document.querySelector("#username")?.value);}}    />
-          <Button variant="secondary" onClick={async()=>{ await usernameChecker("https://healthcare-back.onrender.com",username,alreadyUsed);}}>
-            Check if username unique
-          </Button>
-          <Form.Text id="usernameHelp" muted>
-            {alreadyUsed.current ? "The Username is already used" : "The Username is accepted"}
-          </Form.Text>
           <Form.Label htmlFor="address">Address</Form.Label>
           <Form.Control id="address" type="text" placeholder="address" onChange={() => { setAddress(document.querySelector("#address")?.value) }} />
           <Form.Label htmlFor="specialty">Specialty</Form.Label>
           <Form.Control id="specialty" type="text" placeholder="specialty" onChange={() => { setSpecialty(document.querySelector("#specialty")?.value) }} />
           <Form.Label htmlFor="phone">Phone Number</Form.Label>
-          <Form.Control id="Phone" type="Number" placeholder="Phone Number" onChange={() => { setPhone(document.querySelector("#Phone")?.value) }} />
+          <Form.Control id="Phone" type="text" placeholder="Phone Number" onChange={() => { setPhone(document.querySelector("#Phone")?.value) }} />
           <Form.Label htmlFor="inputPassword5"  >Password</Form.Label>
           <Form.Control
             type="password"
@@ -108,13 +95,17 @@ function SignupDoctor({ handleShow, handleClose, show }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={async() => await postDoctorData("https://healthcare-back.onrender.com", username, password, address, specialty,phone, similar,alreadyUsed)}>
-            Signup
+          <Link to="/">
+          <Button variant="primary" onClick={async() => {await postDoctorData("https://healthcare-back.onrender.com", username, password, address, specialty,phone, similar);handleClose()}}>
+           
+           Signup
           </Button>
+          </Link>
         </Modal.Footer>
       </Modal>
     </>
   );
 }
+
 
 export default SignupDoctor;

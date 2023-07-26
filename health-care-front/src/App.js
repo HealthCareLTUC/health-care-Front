@@ -17,12 +17,12 @@ function App() {
 
    
     <div className="App"> 
-    <NavBar />
+    
 
    <Index />
 
 
-       <Home /> 
+      
    
     <Routes> 
       <Route path='/about' element={<About/>}/>
