@@ -61,6 +61,8 @@ function PatientPage() {
       }
     } catch (error) {
       console.error('Error fetching data:', error);
+     
+
     }
   }
 
@@ -132,17 +134,17 @@ function PatientPage() {
 <div className="containerdesign">
       <div className="left">
         <p>FIND THE DOCTORS <br/>
-          you are in the safe hands </p>
+          "you are in the safe hands" </p>
       </div>
       <div className="right">
         <div className="image-wrapper">
-          <Image src={image1} alt="Image 1" />
+          <Image className='img1' src={image1} alt="Image 1" />
         </div>
         <div className="image-wrapper">
-          <Image src={image2} alt="Image 2" />
+          <Image className='img2' src={image2} alt="Image 2" />
         </div>
         <div className="image-wrapper">
-          <Image src={image3} alt="Image 3" />
+          <Image className='img3' src={image3} alt="Image 3" />
         </div>
       </div>
     </div>
@@ -155,15 +157,15 @@ function PatientPage() {
 
       <div className="form-group">
         <label>Search Doctor by Name:</label>
-        <Form.Control  size="lg" ref={nameInputRef} type="text" className="form-control" placeholder="Enter doctor's name" />
-        <button className="btn btn-primary mt-2" onClick={handleSearchByName}>
+        <Form.Control  size="lg" ref={nameInputRef} type="text" className="form-control" placeholder="Enter doctor's name"  style={{width:'600px'}} />
+        <button className="btn btn-primary mt-2" onClick={handleSearchByName}    style={{backgroundColor:'#1f43e0' }}  >
           Search
         </button>
       </div>
       <div className="form-group mt-4">
         <label>Search Doctor by Specialty:</label>
-        <Form.Control size="lg" ref={specialtyInputRef} type="text" className="form-control" placeholder="Enter doctor's specialty" />
-        <button className="btn btn-primary mt-2" onClick={handleSearchBySpecialty}>
+        <Form.Control size="lg" ref={specialtyInputRef} type="text" className="form-control" placeholder="Enter doctor's specialty"  style={{width:'600px'}}/>
+        <button className="btn btn-primary mt-2" onClick={handleSearchBySpecialty} style={{backgroundColor:'#1f43e0'}}>
           Search
         </button>
       </div>

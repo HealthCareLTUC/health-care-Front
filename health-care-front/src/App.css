@@ -19,7 +19,7 @@
 }
 
 .left p {
-  font-size: 35px;
+  font-size: 38px;
  font-family: 'Courgette', cursive;
   font-family: 'Oregano', cursive; 
   font-weight: 1000;
@@ -44,7 +44,7 @@
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  border: 4px solid #23ccd8; 
+  border: 4px solid #1f43e0;; 
   overflow: hidden;
 }
 
@@ -82,7 +82,7 @@
   align-items: center;
   flex: 1;
   transition: transform 0.2s; 
- 
+
   
 }
 
@@ -91,7 +91,8 @@
 }
 
 .sizeCard{
-
+  border-color: #064588;
+  border-width: 200px;
     display: flex;
     justify-content: space-between;
     max-width: 1200px;
@@ -157,22 +158,19 @@ font-size: 25px;
    background-size: cover;
 }
 
-.container{
-  /* background-color: rgb(212, 247, 235);
-   */
- 
-}
+
 
 
 .form-group{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   font-family: 'Courgette', cursive;
   font-family: 'Oregano', cursive; 
   font-size: 20px;
   font-weight: 600;
   color: #1f43e0;
+  gap :20px
  }
 
 
@@ -192,6 +190,10 @@ font-size: 25px;
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+
+
+
 
 .App-link {
   color: #61dafb;
