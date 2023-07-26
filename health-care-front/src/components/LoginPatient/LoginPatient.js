@@ -7,12 +7,8 @@ function LoginPatient({ handleShow, handleClose, show }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   async function getPatientData(url,username,password){
-
-
-    const response = (await fetch(`${url}/getPatient/${username}`));
+    const response = (await fetch(`${url}/patientName/${username}`));
     const data=await response.json()
-    console.log(response)
-    console.log(data)
     if((data[0]["name"]==username)&&(data[0]["password"]==password)){
       console.log(`logged in successfully`);
     }else{

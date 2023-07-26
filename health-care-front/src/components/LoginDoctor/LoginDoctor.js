@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 function LoginDoctor({ handleShow, handleClose, show }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
   async function getDoctorData(url,username,password){
     const response = (await fetch(`${url}/DoctorName/${username}`));
     const data=await response.json()
