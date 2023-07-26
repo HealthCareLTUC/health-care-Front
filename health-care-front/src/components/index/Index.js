@@ -20,12 +20,23 @@ function Index() {
     const [show3, setShow3] = useState(false);
     const handleClose3 = () => setShow3(false);
     const handleShow3 = () => setShow3(true);
+    const [patientData,setPatient]=useState([])
+    const [DoctorData,setDoctor]=useState([])
+const getPatientData=(value)=>{
+    setPatient(value)
+    console.log(value);
+}
+const getDoctorData=(value)=>{
+    setDoctor(value)
+    console.log(value);
+
+}
     return (
         <div>
 
             <RootNavBar />
-            <LoginDoctor handleClose={handleClose} handleShow={handleShow} show={show} />
-            <LoginPatient handleClose={handleClose1} handleShow={handleShow1} show={show1} />
+            <LoginDoctor handleClose={handleClose} handleShow={handleShow} show={show} callback={getDoctorData}/>
+            <LoginPatient handleClose={handleClose1} handleShow={handleShow1} show={show1} callback={getPatientData} />
             <SignupDoctor handleClose={handleClose2} handleShow={handleShow2} show={show2} />
             <SignupPatient handleClose={handleClose3} handleShow={handleShow3} show={show3} />
             <Stack direction="horizontal" gap={2} className="col-md-5 mx-auto my-2">

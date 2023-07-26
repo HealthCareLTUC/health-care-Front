@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-function LoginPatient({ handleShow, handleClose, show }) {
+function LoginPatient({ handleShow, handleClose, show ,callback}) {
+  const savePatientData=React.createContext()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   async function getPatientData(url,username,password){
@@ -12,6 +13,7 @@ function LoginPatient({ handleShow, handleClose, show }) {
     const data=await response.json()
     if((data[0]["name"]==username)&&(data[0]["password"]==password)){
       console.log(`logged in successfully`);
+      return data
     }else{
       console.log("failed to login");
     }} catch (error) {
@@ -45,7 +47,7 @@ function LoginPatient({ handleShow, handleClose, show }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={async()=>{await getPatientData("https://healthcare-back.onrender.com", username, password)}}>
+          <Button variant="primary" onClick={async()=>{await callback(await getPatientData("https://healthcare-back.onrender.com", username, password))}}>
             Login
           </Button>
         </Modal.Footer>
