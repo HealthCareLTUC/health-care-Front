@@ -75,7 +75,7 @@ function SignupDoctor({ handleShow, handleClose, show }) {
             Check if username unique
           </Button>
           <Form.Text id="usernameHelp" muted>
-            {alreadyUsed ? "The Username is already used" : "The Username is accepted"}
+            {alreadyUsed.current ? "The Username is already used" : "The Username is accepted"}
           </Form.Text>
           <Form.Label htmlFor="address">Address</Form.Label>
           <Form.Control id="address" type="text" placeholder="address" onChange={() => { setAddress(document.querySelector("#address")?.value) }} />

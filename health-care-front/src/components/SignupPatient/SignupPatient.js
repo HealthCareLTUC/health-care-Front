@@ -69,7 +69,7 @@ function SignupPatient({ handleShow, handleClose, show }) {
             Check if username unique
           </Button>
           <Form.Text id="usernameHelp" muted>
-            {alreadyUsed ? "The Username is already used" : "The Username is accepted"}
+            {alreadyUsed.current ? "The Username is already used" : "The Username is accepted"}
           </Form.Text>
           <Form.Label htmlFor="history">Disease you had or are still having</Form.Label>
           <Form.Control id="history" type="text" placeholder="Disease History" onChange={() => { setHistory(document.querySelector("#history")?.value) }} />
