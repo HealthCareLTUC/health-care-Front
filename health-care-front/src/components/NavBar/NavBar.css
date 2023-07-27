@@ -1,3 +1,10 @@
-.bg-body-tertiary{
-    background-color: aqua;
+.me-auto{
+   
+    font-style: italic ;
+    
+}
+.hover:hover {
+  
+    color: white;
+     font-size: larger;
 }

@@ -5,8 +5,8 @@ function Home() {
     return(
         <div>
             <Routes> 
-            <Route path='/home' element={<Reserve/>}/>
            
+            <Route path='/home' element={<Reserve/>}/>
             </Routes>
         </div>
     )

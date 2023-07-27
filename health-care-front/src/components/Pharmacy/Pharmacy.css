@@ -40,7 +40,7 @@
   input{
     text-align: center;
     margin-top: "200px";
-    background: rgba(236, 237, 237, 0.113);
+
    border: none;
    height: 60px;
    width: 550px;
@@ -48,6 +48,6 @@
   }
   body{
 
-  background-image: linear-gradient(rgba(0,8,51,0.9),rgba(0,8,51,0.9)),url("drug.jpg");
+  background-image: url("https://d1csarkz8obe9u.cloudfront.net/posterpreviews/medical-background-design-flyer-template-23b1aee24929b2f7e6d6317535f5ae10_screen.jpg?ts=1679904023");
   background-size:cover;
 }

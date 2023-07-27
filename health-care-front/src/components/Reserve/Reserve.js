@@ -1,23 +1,25 @@
 import React,{useEffect, useState} from 'react'
-import { Card , Table} from 'react-bootstrap';
-function Reserve() {
+import { Card , Table,Modal,Button} from 'react-bootstrap';
+function Reserve(props) {
   const [doctor, setDoctor] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleGetDoctorInfo = async (name) => {
+  const [reservationDate, setReservationDate] = useState('');
+  const [reservationTime, setReservationTime] = useState('');
+  const handleGetDoctorInfo = async () => {
     setIsLoading(true);
     try {
       const url = `https://healthcare-back.onrender.com/searchDocN`; 
       let res = await fetch(url);
-      let recivedData = await res.json();
-      setDoctor(recivedData);
+      let data = await res.json();
+     // setDoctor(recivedData);
 
-      if (url.data.length > 0) {
-        setDoctor(url.data[0]);
-      } else {
-        setDoctor(null);
-      }
+     if (data && data.length > 0) {
+      setDoctor(data[0]);
+    } else {
+      setDoctor(null);
+    }
+    setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -40,26 +42,51 @@ function Reserve() {
     }
     setIsLoading(false);
   };
+  const handleReservation = async () => {
+    setIsLoading(true);
+    try {
+      const url = 'https://healthcare-back.onrender.com/insertappointment';
+      const requestBody = {
+        doctor_id: doctor.id,
+        reservation_date: reservationDate,
+        reservation_time: reservationTime,
+      };
+      await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      
+      handleGetAppointments(doctor.id);
+      setReservationDate('');
+      setReservationTime('');
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+  };
   return (
     <div>
-      <button onClick={() => handleGetDoctorInfo("Doctor Name")}>
-        Get Doctor Info
-      </button>
-      <button onClick={() => handleGetAppointments(1)}>Get Appointments</button>
+     <Modal show={props.show} onHide={props.handleClose} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>{`${doctor?.name} - ${doctor?.specialty}`}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
 
       {isLoading && <div>Loading doctor info...</div>}
       {doctor && (
-        <div>
-          <Card style={{ width: "18rem",height:"200px",marginLeft:"700px" }}>
-              <Card.Body>
-                <Card.Title>Name: {doctor.name}</Card.Title>
-                <Card.Text>Specialty: {doctor.specialty}</Card.Text>
-                <Card.Text>Address: {doctor.address}</Card.Text>
-                <Card.Text>Phone: {doctor.phone}</Card.Text>
-              </Card.Body>
-            </Card>
-            </div>
-      )}
+  <Card style={{ width: '18rem', height: '200px' }}>
+    <Card.Body>
+      <Card.Title>Name: {doctor.name}</Card.Title>
+      <Card.Text>Specialty: {doctor.specialty}</Card.Text>
+      <Card.Text>Address: {doctor.address}</Card.Text>
+      <Card.Text>Phone: {doctor.phone}</Card.Text>
+    </Card.Body>
+  </Card>
+)}
      {appointments.length > 0 && (
         <Table striped bordered hover>
           <thead>
@@ -84,6 +111,19 @@ function Reserve() {
           </tbody>
         </Table>
       )}
+          <h3>Make a Reservation</h3>
+        <div>
+          <input type="text" placeholder="Reservation Date" value={reservationDate} onChange={(e) => setReservationDate(e.target.value)} />
+          <input type="text" placeholder="Reservation Time" value={reservationTime} onChange={(e) => setReservationTime(e.target.value)} />
+          <button onClick={handleReservation}>Reservation</button>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={props.handleClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
     </div>
   );
 }
