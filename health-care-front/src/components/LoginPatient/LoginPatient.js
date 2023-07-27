@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
+import PatientPage from '../../PatientPage'
+
+
+import { Route, Routes } from 'react-router';
 
 function LoginPatient({ handleShow, handleClose, show ,callback}) {
   const savePatientData=React.createContext()
@@ -23,6 +28,7 @@ function LoginPatient({ handleShow, handleClose, show ,callback}) {
 }
   return (
     <>
+   
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Patient's Login</Modal.Title>
@@ -47,9 +53,11 @@ function LoginPatient({ handleShow, handleClose, show ,callback}) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+          <Link to="/patientPage">
           <Button variant="primary" onClick={async()=>{await callback(await getPatientData("https://healthcare-back.onrender.com", username, password))}}>
             Login
           </Button>
+          </Link>
         </Modal.Footer>
       </Modal>
     </>

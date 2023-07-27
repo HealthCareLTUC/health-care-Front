@@ -1,0 +1,40 @@
+ /* .carousel {
+    max-height: 3000px;}
+
+    .carousel-item img {
+        max-height: 10000px; 
+        max-width: 700px;
+      }  */
+
+
+
+
+
+      /* .slider{
+  width: 800px;
+         }
+    */
+
+/* 
+    .slider {
+     
+        /* float: right; */
+        /* margin-right: 20px;  */
+        
+    /* height: 70%; */
+    /* max-height: 100px;
+    max: height 100PX; ; */
+    
+
+
+    /* .carousel-caption { */
+    
+    /* /    color: #fff;  */
+        /* padding: 10px; */
+
+
+
+        .slider {
+            max-width: 800px; 
+            margin: 0 auto;
+          }
