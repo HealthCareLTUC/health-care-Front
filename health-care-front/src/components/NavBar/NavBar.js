@@ -1,16 +1,18 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-//import { Routes} from 'react-router';
+import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "./NavBar.css"
+import logo from '../assests/iconDoctors.png'
 
 //import NavDropdown from 'react-bootstrap/NavDropdown';
 function NavBar() {
   return (
-    <div  >
-    <Navbar  expand="lg" className="bg-body-tertiary"  >
+    <div className='nav' >
+    <Navbar  expand="lg" className="bg-body-tertiary" style={{width:'100%'}} >
     <Container  >
+    <Image src={logo} sm   className='logo'  style={{width:'50px'}}/> 
       <Navbar.Brand href="#home">HealthCare</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -29,4 +31,18 @@ function NavBar() {
 }
 
 
-export default NavBar
+
+export default  NavBar
+
+
+
+
+
+
+
+
+
+
+
+
+

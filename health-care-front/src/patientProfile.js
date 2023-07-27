@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
+import NavBar from './components/NavBar/NavBar';
+
 
 
 function PatientProfile() {
@@ -45,7 +47,9 @@ console.log(appointments);
   
 
   return (
+
     <div className='profilepatient'>
+      <NavBar/>
       <h1>Patient Profile</h1>
       <Table striped bordered hover>
         <thead>

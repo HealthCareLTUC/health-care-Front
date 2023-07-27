@@ -8,6 +8,7 @@ import image2  from './image2.jpg'
 import image3 from './image3.jpg'
 import Form from 'react-bootstrap/Form';
 import './App.css';
+import NavBar from './components/NavBar/NavBar';
 
 
 
@@ -15,7 +16,7 @@ import './App.css';
 
 
 
-function PatientPage() {
+function PatientPage(props) {
   const [SearchName, setSearchName] = useState('');
   const [specialty, setSpecialty] = useState('');
   const nameInputRef = useRef(null);
@@ -24,7 +25,7 @@ function PatientPage() {
   // const [patient, setpatient] = useState([]);
 
 
-
+console.log(props.patientData);
   async function fetchAppointments() {
     try {
       const response = await fetch('https://healthcare-back.onrender.com/getAllAppointment');
@@ -118,7 +119,10 @@ function PatientPage() {
   
 
   return (
+
+
     <div className="container">
+      {/* <NavBar/> */}
     
       {/* {patient.map((patient, i) => {
         return (
@@ -157,15 +161,15 @@ function PatientPage() {
 
       <div className="form-group">
         <label>Search Doctor by Name:</label>
-        <Form.Control  size="lg" ref={nameInputRef} type="text" className="form-control" placeholder="Enter doctor's name"  style={{width:'600px'}} />
-        <button className="btn btn-primary mt-2" onClick={handleSearchByName}    style={{backgroundColor:'#1f43e0' }}  >
+        <Form.Control  size="lg" ref={nameInputRef} type="text" className="form-control" placeholder="Enter doctor's name"  style={{width:'600px' ,margin:"30px",backgroundColor:"#E3F4F4"}} />
+        <button className="btn btn-primary mt-2" onClick={handleSearchByName}     style={{backgroundColor:'#1f43e0', width:'100px' ,height:'55px' }} >
           Search
         </button>
       </div>
       <div className="form-group mt-4">
         <label>Search Doctor by Specialty:</label>
-        <Form.Control size="lg" ref={specialtyInputRef} type="text" className="form-control" placeholder="Enter doctor's specialty"  style={{width:'600px'}}/>
-        <button className="btn btn-primary mt-2" onClick={handleSearchBySpecialty} style={{backgroundColor:'#1f43e0'}}>
+        <Form.Control size="lg" ref={specialtyInputRef} type="text" className="form-control" placeholder="Enter doctor's specialty" style={{width:'600px' ,margin:"20px",backgroundColor:"#E3F4F4"}}/>
+        <button className="btn btn-primary mt-2" onClick={handleSearchBySpecialty} style={{backgroundColor:'#1f43e0', width:'100px' ,height:'55px' }}>
           Search
         </button>
       </div>

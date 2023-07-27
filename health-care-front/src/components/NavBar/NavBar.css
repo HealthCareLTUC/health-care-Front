@@ -1,3 +1,16 @@
 .bg-body-tertiary{
-    background-color: aqua;
-}
+    display: flex;
+    justify-content: space-between;
+    row-gap: 100px;
+    
+   }
+
+   .nav{
+    background-color:white;
+    margin-right: 20px;
+    height: 10px;
+   }
+
+
+
+ 
