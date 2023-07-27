@@ -10,6 +10,7 @@ function SignupDoctor({ handleShow, handleClose, show }) {
   const [address, setAddress] = useState(``)
   const [specialty, setSpecialty] = useState(``)
   const [phone,setPhone] =useState(123)
+  
   const url = process.env.REACT_APP_SERVER_URL;
   
   useEffect(() => {
@@ -95,7 +96,7 @@ function SignupDoctor({ handleShow, handleClose, show }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Link to="/">
+          <Link to={"/"}>
           <Button variant="primary" onClick={async() => {await postDoctorData("https://healthcare-back.onrender.com", username, password, address, specialty,phone, similar);handleClose()}}>
            
            Signup

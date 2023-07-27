@@ -6,6 +6,7 @@ function Home() {
         <div>
             <Routes> 
             <Route path='/home' element={<Reserve/>}/>
+          
            
             </Routes>
         </div>

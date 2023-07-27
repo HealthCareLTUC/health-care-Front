@@ -2,23 +2,30 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-function LoginDoctor({ handleShow, handleClose, show ,callback}) {
+function LoginDoctor({ handleShow, handleClose, show, callback }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  async function getDoctorData(url,username,password){
+  const [path, setPath] = useState("/")
+  async function getDoctorData(url, username, password) {
     try {
-    const response = (await fetch(`${url}/DoctorName/${username}`));
-    const data=await response.json()
-    if((data[0]["name"]==username)&&(data[0]["password"]==password)){
-      console.log(`logged in successfully`);
-      return data
-    }else{
-      console.log("failed to login");
-    }} catch (error) {
-      alert("Username is wrong "+error)
+      const response = (await fetch(`${url}/DoctorName/${username}`));
+      const data = await response.json()
+      if ((data[0]["name"] == username) && (data[0]["password"] == password)) {
+        console.log(`logged in successfully`);
+        window.location.href = "/";
+        return data
+      } else {
+        console.log("failed to login");
+        window.location.href = "/";
+
+      }
+    } catch (error) {
+      alert("Username is wrong " + error)
+      window.location.href = "/";
+
 
     }
-}
+  }
 
   return (
     <>
@@ -46,7 +53,7 @@ function LoginDoctor({ handleShow, handleClose, show ,callback}) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={async()=>{await callback(await getDoctorData("https://healthcare-back.onrender.com", username, password))}}>
+          <Button variant="primary" onClick={async () => { await callback(await getDoctorData("https://healthcare-back.onrender.com", username, password)) }}>
             Login
           </Button>
         </Modal.Footer>
